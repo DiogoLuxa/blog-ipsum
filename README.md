@@ -36,13 +36,13 @@ O projeto inclui funcionalidades básicas de CRUD para posts e exibe uma lista d
 1. Clone o repositório:
 
     ```bash
-    git clone https://github.com/DiogoLuxa/your-repo-name.git
+    git clone https://github.com/DiogoLuxa/blog-ipsum.git
     ```
 
 2. Navegue até o diretório do projeto:
 
     ```bash
-    cd your-repo-name
+    cd blog-ipsum
     ```
 
 3. Instale as dependências:
@@ -95,23 +95,6 @@ src
 ├─ index.css
 └─ main.jsx
 ```
-
-## Contribuindo
-
-1. Faça um fork do repositório.
-2. Crie uma branch para suas alterações:
-    ```bash
-    git checkout -b feature/nome-da-feature
-    ```
-3. Faça as alterações e commit:
-    ```bash
-    git commit -am 'Adiciona nova funcionalidade'
-    ```
-4. Envie para o repositório remoto:
-    ```bash
-    git push origin feature/nome-da-feature
-    ```
-5. Abra um pull request.
 
 ## Contato
 
