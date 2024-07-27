@@ -1,0 +1,47 @@
+.post-detail__title {
+    text-transform: capitalize;
+    font-size: 1.1rem;
+    letter-spacing: 0.3px;
+    font-weight: 500;
+    margin-top: 1rem;
+}
+.post-detail__actions {
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+    margin: 1rem 0;
+}
+.post-detail__pending {
+    color: #eab308;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.post-detail__error {
+    color: #ef4444;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.post-detail__success {
+    color: #22c55e;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.post-detail__body {
+    text-transform: capitalize;
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+.post-detail__comments-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+.post-detail__comment {
+    margin-bottom: 0.75rem;
+    padding-left: 1rem;
+}
+.post-detail__comment-email {
+    text-transform: capitalize;
+    font-weight: 500;
+}
