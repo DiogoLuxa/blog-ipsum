@@ -24,7 +24,6 @@ export const PostDetail = ({ post, deleteMutation, updateMutation }) => {
         return <p>Error: {error.message}</p>;
     }
 
-    console.log('updateMutation', updateMutation);
     return (
         <div>
             <h3 className="text-2xl capitalize mt-3">{post.title}</h3>
