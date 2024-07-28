@@ -24,6 +24,7 @@ export const PostDetail = ({ post, deleteMutation, updateMutation }) => {
         return <p>Error: {error.message}</p>;
     }
 
+    console.log('updateMutation', updateMutation);
     return (
         <div>
             <h3 className="text-2xl capitalize mt-3">{post.title}</h3>
@@ -32,14 +33,24 @@ export const PostDetail = ({ post, deleteMutation, updateMutation }) => {
                     size="sm"
                     variant="destructive"
                     onClick={handleDelete}
-                    disabled={deleteMutation.isSuccess ? true : false}
+                    disabled={
+                        deleteMutation.isSuccess || updateMutation.isPending
+                            ? true
+                            : false
+                    }
                 >
                     Delete
                 </Button>
                 <Button
                     size="sm"
                     onClick={handleUpdate}
-                    disabled={deleteMutation.isSuccess ? true : false}
+                    disabled={
+                        deleteMutation.isSuccess ||
+                        deleteMutation.isPending ||
+                        updateMutation.isPending
+                            ? true
+                            : false
+                    }
                 >
                     Update title
                 </Button>
