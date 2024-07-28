@@ -1,20 +1,22 @@
 import { useState, useEffect } from 'react';
 
-import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
 
-import { fetchPosts, deletePost, updatePost } from '../../api/dataFetch.js';
+import { fetchPosts, deletePost, updatePost } from '@/api/dataFetch.js';
+
+import { usePosts } from '@/api/queries.js';
 
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import PostDetail from '../PostDetail/';
-
-import './Posts.css';
+import { PostDetail } from '@/components/PostDetail/PostDetail';
 
 const maxPostPage = 10;
 
-export function Posts() {
+export const Posts = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedPost, setSelectedPost] = useState(null);
+
+    const { data, isLoading, isError, error } = usePosts(currentPage);
 
     const queryClient = useQueryClient();
 
@@ -27,11 +29,6 @@ export function Posts() {
             });
         }
     }, [currentPage, queryClient]);
-
-    const query = useQuery({
-        queryKey: ['posts', currentPage],
-        queryFn: () => fetchPosts(currentPage),
-    });
 
     const updateMutation = useMutation({
         mutationFn: (postId) => updatePost(postId),
@@ -59,36 +56,38 @@ export function Posts() {
         }
     };
 
-    if (query.isLoading) {
+    if (isLoading) {
         return <p>Loading...</p>;
     }
 
-    if (query.isError) {
-        return <p>Error: {query.error.message}</p>;
+    if (isError) {
+        return <p>Error: {error.message}</p>;
     }
 
     return (
         <>
-            <div className="posts">
-                {query.data.map((post) => (
+            <div className="flex flex-col gap-y-3">
+                {data.map((post) => (
                     <p
                         key={post.id}
-                        className="post-title"
+                        className="capitalize cursor-pointer text-lg hover:text-slate-500"
                         onClick={() => handlePostClick(post)}
                     >
                         {post.title}
                     </p>
                 ))}
             </div>
-            <div className="pagination">
+            <div className="flex justify-between items-center my-3">
                 <Button
+                    size="sm"
                     disabled={currentPage <= 1 ? true : false}
                     onClick={handlePreviousPage}
                 >
                     Previous page
                 </Button>
-                <p className="pagination__paragraph">Page {currentPage}</p>
+                <p className="text-sm">Page {currentPage}</p>
                 <Button
+                    size="sm"
                     disabled={currentPage >= maxPostPage ? true : false}
                     onClick={handleNextPage}
                 >
@@ -105,4 +104,4 @@ export function Posts() {
             )}
         </>
     );
-}
+};

@@ -1,13 +1,10 @@
-import Posts from '../components/Posts';
-import './App.css';
+import { Posts } from '@/components/Posts/Posts';
 
-function App() {
+export const App = () => {
     return (
-        <div className="app">
-            <h1 className="app__title">Blog Ipsum</h1>
+        <div className="p-3">
+            <h1 className="text-4xl font-semibold mb-3">Blog Ipsum</h1>
             <Posts />
         </div>
     );
-}
-
-export default App;
+};

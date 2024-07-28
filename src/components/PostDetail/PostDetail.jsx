@@ -1,18 +1,11 @@
 import PropTypes from 'prop-types';
 
-import { useQuery } from '@tanstack/react-query';
-
-import { fetchComments } from '../../api/dataFetch.js';
+import { useComments } from '@/api/queries.js';
 
 import { Button } from '@/components/ui/button';
 
-import './PostDetail.css';
-
-export function PostDetail({ post, deleteMutation, updateMutation }) {
-    const query = useQuery({
-        queryKey: ['comments', post.id],
-        queryFn: () => fetchComments(post.id),
-    });
+export const PostDetail = ({ post, deleteMutation, updateMutation }) => {
+    const { data, isLoading, isError, error } = useComments(post.id);
 
     const handleDelete = () => {
         updateMutation.reset();
@@ -22,21 +15,21 @@ export function PostDetail({ post, deleteMutation, updateMutation }) {
     const handleUpdate = () => {
         updateMutation.mutate(post.id);
     };
-    console.log(updateMutation);
 
-    if (query.isLoading) {
+    if (isLoading) {
         return <p>Loading comments...</p>;
     }
 
-    if (query.isError) {
-        return <p>Error: {query.error.message}</p>;
+    if (isError) {
+        return <p>Error: {error.message}</p>;
     }
 
     return (
-        <div className="post-detail">
-            <h3 className="post-detail__title">{post.title}</h3>
-            <div className="post-detail__actions">
+        <div>
+            <h3 className="text-2xl capitalize mt-3">{post.title}</h3>
+            <div className="flex items-center gap-3 my-3">
                 <Button
+                    size="sm"
                     variant="destructive"
                     onClick={handleDelete}
                     disabled={deleteMutation.isSuccess ? true : false}
@@ -44,6 +37,7 @@ export function PostDetail({ post, deleteMutation, updateMutation }) {
                     Delete
                 </Button>
                 <Button
+                    size="sm"
                     onClick={handleUpdate}
                     disabled={deleteMutation.isSuccess ? true : false}
                 >
@@ -51,33 +45,41 @@ export function PostDetail({ post, deleteMutation, updateMutation }) {
                 </Button>
             </div>
             {deleteMutation.isPending && (
-                <p className="post-detail__pending">Deleting post...</p>
+                <p className="text-sm text-yellow-500 font-medium">
+                    Deleting post...
+                </p>
             )}
             {deleteMutation.isError && (
-                <p className="post-detail__error">
+                <p className="text-sm text-red-500 font-medium">
                     Error deleting post: {deleteMutation.error.message}
                 </p>
             )}
             {deleteMutation.isSuccess && (
-                <p className="post-detail__success">Post deleted!</p>
+                <p className="text-sm text-green-500 font-medium">
+                    Post deleted!
+                </p>
             )}
             {updateMutation.isPending && (
-                <p className="post-detail__pending">Updating post...</p>
+                <p className="text-sm text-yellow-500 font-medium">
+                    Updating post...
+                </p>
             )}
             {updateMutation.isError && (
-                <p className="post-detail__error">
+                <p className="text-sm text-red-500 font-medium">
                     Error updating post: {updateMutation.error.message}
                 </p>
             )}
             {updateMutation.isSuccess && (
-                <p className="post-detail__success">Post updated!</p>
+                <p className="text-sm text-green-500 font-medium">
+                    Post updated!
+                </p>
             )}
-            <p className="post-detail__body">{post.body}</p>
-            <h4 className="post-detail__comments-title">Comments:</h4>
-            <div className="post-detail__comments">
-                {query.data.map((comment) => (
-                    <p key={comment.id} className="post-detail__comment">
-                        <span className="post-detail__comment-email">
+            <p className="capitalize text-lg italic my-3">{post.body}</p>
+            <h4 className="text-lg font-medium mb-2">Comments:</h4>
+            <div>
+                {data.map((comment) => (
+                    <p key={comment.id} className="mb-3 ml-4">
+                        <span className="capitalize font-medium">
                             {comment.email}
                         </span>
                         : {comment.body}
@@ -86,7 +88,7 @@ export function PostDetail({ post, deleteMutation, updateMutation }) {
             </div>
         </div>
     );
-}
+};
 
 PostDetail.propTypes = {
     post: PropTypes.shape({
