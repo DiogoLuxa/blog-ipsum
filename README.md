@@ -72,26 +72,19 @@ Aqui está a estrutura de arquivos do projeto:
 ```
 src
 ├─ api
-│  └─ dataFetch.js
-├─ app
-│  ├─ App.css
-│  ├─ App.jsx
-│  └─ index.js
-├─ assets
+│  ├─ dataFetch.js
+│  └─ queries.js
 ├─ components
 │  ├─ PostDetail
-│  │  ├─ index.js
-│  │  ├─ PostDetail.css
 │  │  └─ PostDetail.jsx
 │  ├─ Posts
-│  │  ├─ index.js
-│  │  ├─ Posts.css
 │  │  └─ Posts.jsx
 │  └─ ui
 │     ├─ button.jsx
 │     └─ separator.jsx
 ├─ lib
 │  └─ utils.js
+├─ App.jsx
 ├─ index.css
 └─ main.jsx
 ```
