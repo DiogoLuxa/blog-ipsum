@@ -13,6 +13,7 @@ O projeto inclui funcionalidades básicas de CRUD para posts e exibe uma lista d
 -   **Axios**: Biblioteca para fazer requisições HTTP.
 -   **TanStack React Query**: Biblioteca para gerenciamento de estado e cache de dados.
 -   **Shadcn**: Biblioteca de componentes UI para estilização e construção de interfaces.
+-   **Tailwind CSS**: Framework de CSS utilitário para estilização rápida e eficiente.
 
 ## Funcionalidades
 
