@@ -80,6 +80,8 @@ src
 │  │  └─ PostDetail.jsx
 │  ├─ Posts
 │  │  └─ Posts.jsx
+│  ├─ StatusMessage
+│  │  └─ StatusMessage.jsx
 │  └─ ui
 │     ├─ button.jsx
 │     └─ separator.jsx
@@ -88,10 +90,11 @@ src
 ├─ App.jsx
 ├─ index.css
 └─ main.jsx
+
 ```
 
 ## Contato
 
--   **Nome**: Diogo Luxa
+-   **Nome**: Diogo Tadeu
 -   **Email**: diogoluxa@outlook.com
--   **LinkedIn**: [Diogo Luxa](https://www.linkedin.com/in/diogo-tadeu)
+-   **LinkedIn**: [Diogo Tadeu](https://www.linkedin.com/in/diogo-tadeu)
