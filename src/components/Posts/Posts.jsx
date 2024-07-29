@@ -64,6 +64,12 @@ export const Posts = () => {
         return <p>Error: {error.message}</p>;
     }
 
+    const postDetailProps = {
+        post: selectedPost,
+        deleteMutation,
+        updateMutation,
+    };
+
     return (
         <>
             <div className="flex flex-col gap-y-3">
@@ -95,13 +101,7 @@ export const Posts = () => {
                 </Button>
             </div>
             <Separator />
-            {selectedPost && (
-                <PostDetail
-                    post={selectedPost}
-                    deleteMutation={deleteMutation}
-                    updateMutation={updateMutation}
-                />
-            )}
+            {selectedPost && <PostDetail {...postDetailProps} />}
         </>
     );
 };
