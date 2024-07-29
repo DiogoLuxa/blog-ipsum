@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useComments } from '@/api/queries.js';
 
 import { Button } from '@/components/ui/button';
+import { StatusMessage } from '@/components/StatusMessage/StatusMessage';
 
 export const PostDetail = ({ post, deleteMutation, updateMutation }) => {
     const { data, isLoading, isError, error } = useComments(post.id);
@@ -54,36 +55,8 @@ export const PostDetail = ({ post, deleteMutation, updateMutation }) => {
                     Update title
                 </Button>
             </div>
-            {deleteMutation.isPending && (
-                <p className="text-sm text-yellow-500 font-medium">
-                    Deleting post...
-                </p>
-            )}
-            {deleteMutation.isError && (
-                <p className="text-sm text-red-500 font-medium">
-                    Error deleting post: {deleteMutation.error.message}
-                </p>
-            )}
-            {deleteMutation.isSuccess && (
-                <p className="text-sm text-green-500 font-medium">
-                    Post deleted!
-                </p>
-            )}
-            {updateMutation.isPending && (
-                <p className="text-sm text-yellow-500 font-medium">
-                    Updating post...
-                </p>
-            )}
-            {updateMutation.isError && (
-                <p className="text-sm text-red-500 font-medium">
-                    Error updating post: {updateMutation.error.message}
-                </p>
-            )}
-            {updateMutation.isSuccess && (
-                <p className="text-sm text-green-500 font-medium">
-                    Post updated!
-                </p>
-            )}
+            <StatusMessage type={'delete'} mutation={deleteMutation} />
+            <StatusMessage type={'update'} mutation={updateMutation} />
             <p className="capitalize text-lg italic my-3">{post.body}</p>
             <h4 className="text-lg font-medium mb-2">Comments:</h4>
             <div>
