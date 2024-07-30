@@ -10,8 +10,6 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { PostDetail } from '@/components/PostDetail/PostDetail';
 
-const maxPostPage = 10;
-
 export const Posts = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedPost, setSelectedPost] = useState(null);
@@ -23,6 +21,8 @@ export const Posts = () => {
     const deleteMutation = useDeletePost();
 
     const queryClient = useQueryClient();
+
+    const maxPostPage = 10;
 
     useEffect(() => {
         if (currentPage < maxPostPage) {
