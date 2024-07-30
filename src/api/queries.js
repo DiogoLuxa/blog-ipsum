@@ -1,6 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 
-import { fetchPosts, fetchComments } from '@/api/dataFetch';
+import { fetchPosts, fetchComments, updatePost } from '@/api/dataFetch';
 
 export const usePosts = (currentPage) => {
     const { data, isLoading, isError, error } = useQuery({
@@ -18,4 +18,12 @@ export const useComments = (postId) => {
     });
 
     return { data, isLoading, isError, error };
+};
+
+export const useUpdatePost = () => {
+    const updateMutation = useMutation({
+        mutationFn: (postId) => updatePost(postId),
+    });
+
+    return updateMutation;
 };
