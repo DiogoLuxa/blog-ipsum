@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
-import { useQueryClient, useMutation } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
-import { fetchPosts, deletePost } from '@/api/dataFetch.js';
+import { fetchPosts } from '@/api/dataFetch.js';
 
-import { usePosts, useUpdatePost } from '@/api/queries.js';
+import { usePosts, useUpdatePost, useDeletePost } from '@/api/queries.js';
 
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -20,6 +20,8 @@ export const Posts = () => {
 
     const updateMutation = useUpdatePost();
 
+    const deleteMutation = useDeletePost();
+
     const queryClient = useQueryClient();
 
     useEffect(() => {
@@ -31,10 +33,6 @@ export const Posts = () => {
             });
         }
     }, [currentPage, queryClient]);
-
-    const deleteMutation = useMutation({
-        mutationFn: (postId) => deletePost(postId),
-    });
 
     const handlePostClick = (post) => {
         deleteMutation.reset();
